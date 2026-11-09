@@ -2,6 +2,13 @@
 
 A study assistant that extracts text from notes, retrieves relevant passages, and uses them to answer questions or create MCQs, theory questions, numerical practice, and revision priorities. Responses include source references so you can check them against your notes.
 
+## Download the project
+
+1. Open the [GitHub repository](https://github.com/manish2049/rag-chatbot). If it is private, sign in with an account that has access.
+2. Click the green **Code** button, then select **Download ZIP**.
+3. Find the ZIP in your Downloads folder and extract it: on Windows, right-click it and select **Extract All**; on macOS, double-click it.
+4. Open the extracted project folder containing `app.py` and `requirements.txt`. Run the setup commands below from this folder. On Windows, you can click the folder's address bar, type `powershell`, and press Enter to open PowerShell there.
+
 ## Run locally
 
 1. Install Python 3.10 or later and, for images and scanned PDFs, [Tesseract OCR](https://tesseract-ocr.github.io/tessdoc/Installation.html). Make sure the `tesseract` command is on your PATH. Selectable text in PDFs works without Tesseract.
