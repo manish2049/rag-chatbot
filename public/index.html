@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f7f3" />
+  <title>Notewise — Your notes, exam ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a href="/" class="brand" aria-label="Notewise home"><span class="brand-mark">✳</span><span>note<span class="brand-light">wise</span></span></a>
+    <div class="side-label">YOUR WORKSPACE</div>
+    <a class="nav-item active" href="#workspace"><span class="nav-icon">▦</span> Study workspace <span class="nav-arrow">↗</span></a>
+    <a class="nav-item" href="#materials"><span class="nav-icon">▤</span> My materials</a>
+    <div class="sidebar-bottom">
+      <div class="side-card"><div class="side-spark">✳</div><strong>Study smarter,<br>not harder.</strong><p>Everything you need to turn your notes into confidence.</p></div>
+      <div class="side-footer"><span class="avatar">N</span><span><strong>Your workspace</strong><small>Ready when you are</small></span><span class="footer-dots">···</span></div>
+    </div>
+  </aside>
+  <main class="main" id="workspace">
+    <header class="topbar"><div class="breadcrumb">WORKSPACE <span>/</span> <strong>STUDY SESSION</strong></div><div class="top-right"><span class="status-dot"></span> Your study space <span class="top-avatar">✳</span></div></header>
+    <div class="content">
+      <section class="intro"><div><div class="eyebrow"><span>✳</span> YOUR PERSONAL STUDY COMPANION</div><h1>Good notes. <em>Great results.</em></h1><p>Turn your study materials into practice that actually sticks.</p></div><div class="intro-doodle" aria-hidden="true"><span>✦</span><div>✳</div><small>✧</small></div></section>
+      <div class="workspace-grid">
+        <div class="primary-column">
+          <section class="upload-section" id="materials"><div class="section-heading"><div><div class="section-kicker">STEP 01 <span>—</span> ADD YOUR MATERIAL</div><h2>Start with your notes</h2><p>Upload your notes and let’s make them work harder for you.</p></div><span class="step-number">01</span></div>
+            <label class="dropzone" id="dropzone"><input type="file" id="fileInput" accept=".pdf,image/*" multiple hidden><span class="upload-icon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4m0 0L8 8m4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span><span class="drop-title">Drop your files here, or <b>browse files</b></span><span class="drop-subtitle">PDFs or images of your notes <span>·</span> Multiple files welcome</span></label>
+            <div class="upload-feedback" id="uploadFeedback" role="status"></div>
+          </section>
+          <section class="practice-section"><div class="section-heading practice-heading"><div><div class="section-kicker">STEP 02 <span>—</span> MAKE IT STICK</div><h2>What are we studying today?</h2><p>Pick a way to practice, or ask anything about your notes.</p></div><span class="step-number">02</span></div>
+            <div class="mode-grid">
+              <button class="mode-card" data-mode="mcq"><span class="mode-icon peach">☑</span><span><strong>Multiple choice</strong><small>Test what you know</small></span><span class="mode-arrow">↗</span></button>
+              <button class="mode-card" data-mode="theory"><span class="mode-icon lavender">✎</span><span><strong>Theory questions</strong><small>Go a little deeper</small></span><span class="mode-arrow">↗</span></button>
+              <button class="mode-card" data-mode="numerical"><span class="mode-icon mint">∑</span><span><strong>Numerical problems</strong><small>Put it into practice</small></span><span class="mode-arrow">↗</span></button>
+              <button class="mode-card" data-mode="topics"><span class="mode-icon yellow">✳</span><span><strong>Important topics</strong><small>Focus on what matters</small></span><span class="mode-arrow">↗</span></button>
+            </div>
+          </section>
+          <section class="chat-section" id="chat"><div class="chat-header"><div><span class="chat-badge">✳</span><span><strong>Ask Notewise</strong><small>Your notes, your questions</small></span></div><span class="chat-tag"><i></i> STUDY ASSISTANT</span></div><div class="messages" id="messages" aria-live="polite"><div class="welcome-message"><div class="message-avatar">✳</div><div><strong>Hey there, ready to study?</strong><p>Upload your material above, then choose a practice type or ask me a question. I’ll use your notes to help you prepare.</p><span>LET’S MAKE PROGRESS TOGETHER ✨</span></div></div></div><form class="chat-form" id="chatForm"><input id="messageInput" placeholder="Ask a question about your notes..." autocomplete="off" aria-label="Ask a question about your notes"><button type="submit" id="sendButton" aria-label="Send message">↑</button></form><p class="chat-disclaimer">Answers are based on your uploaded materials. Always double-check important details.</p></section>
+        </div>
+        <aside class="right-column"><div class="library-card"><div class="library-top"><div><span class="section-kicker">YOUR LIBRARY</span><h3>Study materials</h3></div><span class="library-icon">▤</span></div><p>Your uploaded files live here for this session.</p><div id="documentList" class="document-list"><div class="empty-docs"><span>▧</span><strong>A fresh start</strong><small>Your materials will show up here once uploaded.</small></div></div><label for="fileInput" class="add-material">＋ &nbsp; Add material</label></div>
+          <div class="tip-card"><span class="tip-icon">✳</span><div class="tip-label">A LITTLE STUDY TIP</div><h3>Practice makes<br><em>progress.</em></h3><p>Testing yourself is one of the best ways to remember what you learn.</p><div class="tip-bottom">YOU’VE GOT THIS <span>↗</span></div></div>
+          <div class="right-note"><span>✦</span> One study session at a time.</div>
+        </aside>
+      </div>
+      <footer>MADE FOR CURIOUS MINDS <span>✳</span> KEEP GOING, YOU’RE DOING GREAT</footer>
+    </div>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
