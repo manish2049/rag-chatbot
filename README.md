@@ -1,57 +1,105 @@
 # Study RAG
 
-A study assistant that extracts text from notes, retrieves relevant passages, and uses them to answer questions or create MCQs, theory questions, numerical practice, and revision priorities. Responses include source references so you can check them against your notes.
+Turn PDF notes and images into study material: ask questions, generate MCQs, theory and numerical questions, and find important topics. The app retrieves relevant passages from your notes and sends them to an AI model to help create answers.
 
-## Download the project
+## Run it on Windows: step by step
 
-1. Open the [GitHub repository](https://github.com/manish2049/rag-chatbot). If it is private, sign in with an account that has access.
-2. Click the green **Code** button, then select **Download ZIP**.
-3. Find the ZIP in your Downloads folder and extract it: on Windows, right-click it and select **Extract All**; on macOS, double-click it.
-4. Open the extracted project folder containing `app.py` and `requirements.txt`. Run the setup commands below from this folder. On Windows, you can click the folder's address bar, type `powershell`, and press Enter to open PowerShell there.
+### 1. Download and extract the project
 
-## Run locally
+1. Open [this GitHub repository](https://github.com/manish2049/rag-chatbot).
+2. Click the green **Code** button and choose **Download ZIP**.
+3. Open your Downloads folder, right-click the downloaded ZIP, and choose **Extract All**. Choose a location and click **Extract**.
+4. Open the extracted folder. If there is another folder inside it, open that too, until you see **app.py**, **requirements.txt**, and the **public** folder.
 
-1. Install Python 3.10 or later and, for images and scanned PDFs, [Tesseract OCR](https://tesseract-ocr.github.io/tessdoc/Installation.html). Make sure the `tesseract` command is on your PATH. Selectable text in PDFs works without Tesseract.
-2. Install the dependencies from the project folder. In Windows PowerShell:
+### 2. Open PowerShell in the project folder
 
-   ```powershell
-   python -m pip install -r requirements.txt
-   ```
+In the folder containing **app.py**, click the address bar at the top of File Explorer, type `powershell`, and press **Enter**. A PowerShell window opens in that folder.
 
-   On macOS or Linux, use `python3 -m pip install -r requirements.txt`.
+Check that Python is installed:
 
-3. Choose an AI provider and set its environment variables in the same terminal. For Gemini, create your own API key in [Google AI Studio](https://aistudio.google.com/app/apikey). In Windows PowerShell:
+```powershell
+python --version
+```
 
-   ```powershell
-   $env:OPENAI_API_KEY="YOUR_GEMINI_API_KEY"
-   $env:OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
-   $env:OPENAI_MODEL="gemini-3.5-flash-lite"
-   ```
+If you see a version number, continue. If Python is not found, install Python 3.10 or newer from [python.org](https://www.python.org/downloads/) and select **Add Python to PATH** during installation. Then close and reopen PowerShell in the project folder and check again.
 
-   On macOS or Linux, use:
+### 3. Install the dependencies
 
-   ```sh
-   export OPENAI_API_KEY="YOUR_GEMINI_API_KEY"
-   export OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
-   export OPENAI_MODEL="gemini-3.5-flash-lite"
-   ```
+In the same PowerShell window, run:
 
-   Replace `YOUR_GEMINI_API_KEY` with your own key. Keep it private: never commit it to GitHub or share it in screenshots. Gemini model availability and usage limits depend on your account; use another available model if this one is unavailable or busy.
+```powershell
+python -m pip install -r requirements.txt
+```
 
-4. Start the app in the same terminal:
+Wait for the installation to finish before continuing. You generally need to do this only once unless the dependencies change.
 
-   ```sh
-   python -m uvicorn app:app --reload
-   ```
+### 4. Get a Gemini API key
 
-   On macOS or Linux, use `python3` if needed. Keep the terminal open and visit <http://127.0.0.1:8000>. To stop the server, press Ctrl+C. In a new terminal, set the provider variables again before restarting the app.
+1. Open [Google AI Studio](https://aistudio.google.com/app/apikey) and sign in.
+2. Create an API key and copy it.
 
-For OpenAI instead, set `OPENAI_API_KEY` to your OpenAI key, leave `OPENAI_BASE_URL` unset for the default OpenAI endpoint, and optionally set `OPENAI_MODEL` (default `gpt-4o-mini`).
+Keep your key private. Do not commit it to GitHub, share it with anyone, or paste it into a public screenshot.
 
-`OPENAI_MODEL` optionally changes the model (default `gpt-4o-mini`); `OPENAI_BASE_URL` optionally changes the API base URL (default `https://api.openai.com/v1`). Requests send retrieved excerpts and recent conversation messages to the configured model provider. Without a key, the app displays relevant excerpts and a setup notice instead of generating questions.
+### 5. Configure the AI model
 
-## Use and limitations
+In the **same PowerShell window**, enter the following commands one at a time. Replace `YOUR_GEMINI_API_KEY` with your actual key, keeping the quotation marks:
 
-Upload PDF, PNG, JPEG, or WEBP notes, then select a question type or ask about the material. Upload up to 10 files at a time, each up to 20 MB; PDFs may have up to 80 pages, and the server holds up to 30 documents. Password-protected PDFs are unsupported. Documents are held in memory and disappear when the server restarts.
+```powershell
+$env:OPENAI_API_KEY="YOUR_GEMINI_API_KEY"
+$env:OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
+$env:OPENAI_MODEL="gemini-3.5-flash-lite"
+```
 
-OCR quality depends on image clarity and Tesseract's installed language data. Retrieval uses keyword matching, so relevant material can be missed. Generated questions, answers, numerical solutions, and topic priorities can be wrong; check them against the source and your syllabus. Topic priorities are suggestions, not predictions of an actual exam. This local app has no user accounts or access controls and is not intended for public deployment as-is.
+The variables are named `OPENAI_...` because the app uses an OpenAI-compatible API; the settings above connect it to Gemini. Model availability and usage limits depend on your Google account. If this model is unavailable or busy, choose another text model available to your account and change the last command.
+
+### 6. Start the app
+
+In the same PowerShell window, enter:
+
+```powershell
+python -m uvicorn app:app --reload
+```
+
+When you see **Uvicorn running on http://127.0.0.1:8000**, open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. Leave PowerShell open while you use the app.
+
+Upload your notes, choose a practice type or ask a question, and check the source references alongside the answer. To stop the server, return to PowerShell and press **Ctrl+C**.
+
+### 7. Open it again later
+
+1. Open PowerShell in the project folder as described in step 2.
+2. Enter the three Gemini commands from step 5 again. They last only for that PowerShell session.
+3. Run `python -m uvicorn app:app --reload` and open [http://127.0.0.1:8000](http://127.0.0.1:8000).
+4. Upload your notes again. Documents are kept in memory and are lost when the server stops.
+
+### Images and scanned PDFs
+
+To read text from images and scanned PDF pages, install [Tesseract OCR](https://tesseract-ocr.github.io/tessdoc/Installation.html) and make sure the `tesseract` command is on your PATH. Restart PowerShell after installation. PDFs with selectable text work without Tesseract. OCR results depend on image clarity and the installed language data.
+
+### Troubleshooting
+
+- **Could not import module "app":** Stop the server with Ctrl+C. Open PowerShell in the folder containing `app.py`, then start it again.
+- **The site can't be reached:** Make sure Uvicorn is running and the PowerShell window is still open. Use the address printed by Uvicorn.
+- **The language model could not respond:** Check the API key, base URL, model name, internet connection, and provider usage limits. If the provider reports high demand, try again later or select another available text model.
+- **No questions are generated without a key:** Without a configured model, the app shows relevant passages and a setup notice instead.
+
+## macOS and Linux
+
+Download and extract the project as described above. Open Terminal, change into the folder containing `app.py`, and run the following commands. Install Python 3.10 or newer first if needed.
+
+```sh
+python3 -m pip install -r requirements.txt
+export OPENAI_API_KEY="YOUR_GEMINI_API_KEY"
+export OPENAI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
+export OPENAI_MODEL="gemini-3.5-flash-lite"
+python3 -m uvicorn app:app --reload
+```
+
+Replace the placeholder with your Gemini key, keep the terminal open, and visit [http://127.0.0.1:8000](http://127.0.0.1:8000). Set the variables again in each new terminal session. Tesseract is needed for images and scanned PDFs.
+
+## Other providers and limitations
+
+For OpenAI instead, set `OPENAI_API_KEY` to your OpenAI key, leave `OPENAI_BASE_URL` unset for the default OpenAI endpoint, and optionally set `OPENAI_MODEL` (default `gpt-4o-mini`). Retrieved excerpts and recent conversation messages are sent to the configured model provider.
+
+Upload PDF, PNG, JPEG, or WEBP files: up to 10 files at a time, each up to 20 MB. PDFs may have up to 80 pages, and the server holds up to 30 documents. Password-protected PDFs are unsupported.
+
+Retrieval uses keyword matching, so relevant material can be missed. Generated questions, answers, numerical solutions, and topic priorities can be wrong; check them against the sources and your syllabus. Topic priorities are suggestions, not predictions of an actual exam. This local app has no user accounts or access controls and is not intended for public deployment as-is.
